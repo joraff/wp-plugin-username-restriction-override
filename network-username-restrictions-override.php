@@ -1,11 +1,10 @@
 <?php
 /*
 Plugin Name: Network Username Restrictions Override
-Version: 1.2
-Plugin URI: http://danieltwc.com/2011/network-username-restrictions-override-1-0/
-Description: Override some of the built-in restrictions in WordPress network usernames. Similar to the <a href="http://wordpress.org/extend/plugins/wpmu-blog-name-restrictions-override/">Blog Name Restrictions Override</a> plugin.
-Author: Daniel Westermann-Clark
-Author URI: http://danieltwc.com/
+Version: 1.3
+Plugin URI: http://github.tamu/joraff/wp-plugin-network-username-restriction-override
+Description: Fork of the original Network Username Restriction Override plugin by Daniel Westermann-Clark
+Author: Joseph Rafferty
 */
 
 class NetworkUsernameRestrictionsOverridePlugin {
@@ -14,15 +13,15 @@ class NetworkUsernameRestrictionsOverridePlugin {
 	var $options;
 	var $default_options = array(
 		'allow_email_addresses' => false,
-		'allow_numeric' => false,
-		'allow_hyphens' => false,
-		'allow_periods' => false,
-		'allow_underscores' => false,
+		'allow_numeric' => true,
+		'allow_hyphens' => true,
+		'allow_periods' => true,
+		'allow_underscores' => true,
 		'allow_uppercase' => false,
-		'min_length' => 4,
+		'min_length' => 2,
 	);
 
-	function NetworkUsernameRestrictionsOverridePlugin() {
+	function __construct() {
 		add_action('init', array($this, 'init'));
 	}
 
@@ -63,7 +62,8 @@ class NetworkUsernameRestrictionsOverridePlugin {
 
 			if ($code == 'user_name') {
 				foreach ($messages as $message) {
-					if ($message == __('Only lowercase letters (a-z) and numbers are allowed.')) {
+					if ($message == __('Only lowercase letters (a-z) and numbers are allowed.') ||
+						  $message == __('Usernames can only contain lowercase letters (a-z) and numbers.')) {
 						// Check if we allow email addresses; otherwise, check against character overrides
 
 						if (is_email($username)) {
