@@ -1,11 +1,13 @@
 === Network Username Restrictions Override ===
-Contributors: dwc
+Contributors: joraff
 Tags: admin, authentication, network, wpmu, multisite
 Requires at least: 3.4
-Tested up to: 3.4
-Stable tag: 1.2
+Tested up to: 4.4.2
+Stable tag: 1.3
 
 Override restrictions on WordPress network usernames.
+
+Note: this is a fork of https://wordpress.org/plugins/network-username-restrictions-override/, which is not actively maintained.
 
 == Description ==
 
@@ -13,15 +15,8 @@ By default, WordPress network usernames cannot contain anything but lowercase le
 
 Furthermore, this plugin gives you the option to allow email addresses as usernames, or to allow all-numeric usernames (e.g. "1234").
 
-Finally, this plugin lets you override the minimum length for usernames (which defaults to four characters).
+Finally, this plugin lets you override the minimum length for usernames (which defaults to two characters).
 
-To follow updates to this plugin, visit:
-
-http://danieltwc.com/
-
-For help with this version, visit:
-
-http://danieltwc.com/2011/network-username-restrictions-override-1-0/
 
 == Installation ==
 
@@ -47,6 +42,10 @@ You'll have to update the regular expressions in your `.htaccess` file if you us
 
 == Changelog ==
 
+= 1.3 = 
+* Fixes compatibility with PHP7.0
+* Fixes compatibility with WordPress 4.4+
+
 = 1.2 =
 * Remove use of call-time pass by reference to avoid warnings on PHP 5.3 and newer
 * Secondary username length check no longer causes an error when adding a username longer than the configured minimum
@@ -59,14 +58,3 @@ You'll have to update the regular expressions in your `.htaccess` file if you us
 
 = 1.0 =
 * Initial release
-
-== Upgrade Notice ==
-
-= 1.2 =
-Really fix username length check this time; add support for periods in usernames
-
-= 1.1 =
-Minor fix for username length check
-
-= 1.0 =
-Initial release
